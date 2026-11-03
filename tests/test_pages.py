@@ -59,3 +59,17 @@ def test_pt_draws_a_diagram(client):
     })
     assert response.context["result_status"] == 1
     assert b"data:image/png;base64," in response.content
+
+
+def test_pt_converts_celsius(client):
+    response = client.post("/pt/", {
+        "component_form-Components": ["nitrogen", "methane"],
+        "eos_form-Composition": "0.4 0.6",
+        "temp_form-T_units": "C",
+        "temp_form-T_value_start": 80 - 273.15,
+        "temp_form-T_value_end": 180 - 273.15,
+        "temp_form-T_step": 10,
+        "eos_form-Eos_model": "PR",
+        "eos_form-Gap": 5,
+    })
+    assert response.context["result_status"] == 1

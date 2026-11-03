@@ -253,11 +253,11 @@ def pt(request):
             Gap = gap_form.cleaned_data['Gap']
             
             if Temperature_unit == "C":
-                Tempreture_start = Tempreture_start + 273.15
-                Tempreture_end = Tempreture_end + 273.15
+                Temperature_start = Temperature_start + 273.15
+                Temperature_end = Temperature_end + 273.15
             elif Temperature_unit == "F":
-                Tempreture_start = (Tempreture_start-32)*(5/9) + 273.15
-                Tempreture_end = (Tempreture_end-32)*(5/9) + 273.15
+                Temperature_start = (Temperature_start-32)*(5/9) + 273.15
+                Temperature_end = (Temperature_end-32)*(5/9) + 273.15
             
             if any(c.isalpha() for c in Composition) == False:
                 Composition = [float(i) for i in Composition.split()]
