@@ -32,3 +32,19 @@ notebooks = [
 
 [tool.uv]
 package = false
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "vleW1.settings"
+pythonpath = ["web-framework"]
+testpaths = ["tests"]
+addopts = "--cov --cov-report=term-missing:skip-covered"
+# collectstatic runs in the image, not before tests.
+filterwarnings = ["ignore:No directory at:UserWarning"]
+
+[tool.coverage.run]
+source = ["web-framework"]
+branch = true
+omit = ["*/migrations/*", "*/tests.py", "web-framework/manage.py", "web-framework/vleW1/[aw]sgi.py"]
+
+[tool.coverage.report]
+fail_under = 75
