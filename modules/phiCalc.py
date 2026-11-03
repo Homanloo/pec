@@ -17,9 +17,9 @@ def Z_calc(components, T, P, z, eos_model):
     # Three Roots
     if M < 0:
         theta = np.arccos(R/np.sqrt(Q**3))
-        r1 = -(2*np.sqrt(Q) * np.cos((theta/3))) - a/3
-        r2 = -(2*np.sqrt(Q) * np.cos(((theta + 2*np.pi) / 3))) - a/3
-        r3 = -(2*np.sqrt(Q) * np.cos(((theta - 2*np.pi) / 3))) - a/3
+        r1 = -(2*np.sqrt(Q) * np.cos(theta/3)) - a/3
+        r2 = -(2*np.sqrt(Q) * np.cos((theta + 2*np.pi) / 3)) - a/3
+        r3 = -(2*np.sqrt(Q) * np.cos((theta - 2*np.pi) / 3)) - a/3
         
         r = [r1, r2, r3]
     

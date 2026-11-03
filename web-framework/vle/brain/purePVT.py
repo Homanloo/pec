@@ -1,8 +1,10 @@
-import numpy as np
 import math
-from scipy.optimize import fsolve
-import pandas as pd
+
 import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+from scipy.optimize import fsolve
+
 from .properties import prop
 
 
@@ -221,22 +223,22 @@ def visualize(component, eos_model, node_number):
     df, df_vapor, df_liquid, poly_TP, poly_VP_liquid, poly_VP_vapor, Vc = tabulate(component, eos_model, node_number)
 
     fig, (ax_TP, ax_VP) = plt.subplots(nrows=1, ncols=2 ,figsize=(12,5))
-    ax_TP.plot(df['T'], df['P'], 'o',  markersize=3);
+    ax_TP.plot(df['T'], df['P'], 'o',  markersize=3)
     ax_TP.plot(df['T'], poly_TP(df['T']), '-')
-    ax_TP.set_xlabel('Temperature (k)');
-    ax_TP.set_ylabel('Pressure (bar)');
-    ax_TP.set_title(f'T-P Phase Diagram for {component[0].upper()}');
+    ax_TP.set_xlabel('Temperature (k)')
+    ax_TP.set_ylabel('Pressure (bar)')
+    ax_TP.set_title(f'T-P Phase Diagram for {component[0].upper()}')
 
-    ax_VP.plot(df_liquid['V'], df_liquid['P'], 'o', markersize=5,);
-    ax_VP.plot(df_liquid['V'], poly_VP_liquid(df_liquid['V']), '-', label='Liquid Pressure');
-    ax_VP.plot(df_vapor['V'], df_vapor['P'], 'o', markersize=5);
-    ax_VP.plot(df_vapor['V'], poly_VP_vapor(df_vapor['V']), '-', label='Vapor Pressure');
-    ax_VP.plot(df['V Liquid'][0], df['P'][0], marker='o', markersize=8, label='Critical Point');
-    ax_VP.set_xlim(0, Vc*25);
-    ax_VP.legend();
-    ax_VP.set_xlabel('Molar Volume (cm$^3$/mol)');
-    ax_VP.set_ylabel('Pressure (bar)');
-    ax_VP.set_title(f'V-P Phase Diagram for {component[0].upper()}');
+    ax_VP.plot(df_liquid['V'], df_liquid['P'], 'o', markersize=5,)
+    ax_VP.plot(df_liquid['V'], poly_VP_liquid(df_liquid['V']), '-', label='Liquid Pressure')
+    ax_VP.plot(df_vapor['V'], df_vapor['P'], 'o', markersize=5)
+    ax_VP.plot(df_vapor['V'], poly_VP_vapor(df_vapor['V']), '-', label='Vapor Pressure')
+    ax_VP.plot(df['V Liquid'][0], df['P'][0], marker='o', markersize=8, label='Critical Point')
+    ax_VP.set_xlim(0, Vc*25)
+    ax_VP.legend()
+    ax_VP.set_xlabel('Molar Volume (cm$^3$/mol)')
+    ax_VP.set_ylabel('Pressure (bar)')
+    ax_VP.set_title(f'V-P Phase Diagram for {component[0].upper()}')
 
     plt.show()
     

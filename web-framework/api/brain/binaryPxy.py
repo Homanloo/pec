@@ -1,7 +1,8 @@
-from .bublP import bubble_P
+import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
+
+from .bublP import bubble_P
 
 
 def tabulate(components, T, EoS_model, node_number):
@@ -27,7 +28,7 @@ def tabulate(components, T, EoS_model, node_number):
                 status, message, P_final, y_final = bubble_P(components, T, i, EoS_model)
                 P_list.append(P_final)
                 y_list.append(y_final)
-        except:
+        except Exception:
             continue
     
     df1 = pd.DataFrame()

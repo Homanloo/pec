@@ -1,7 +1,18 @@
-from django.shortcuts import render
-from .forms import ComponentForm, CompositionForm, UnitForm, ValueForm, EosModel, NodeForm, TemperatureForm, EnvelopeTemp, GapForm
-from .brain import main, binaryPxy, phaseEnvelope
 import numpy as np
+from django.shortcuts import render
+
+from .brain import binaryPxy, main, phaseEnvelope
+from .forms import (
+    ComponentForm,
+    CompositionForm,
+    EnvelopeTemp,
+    EosModel,
+    GapForm,
+    NodeForm,
+    TemperatureForm,
+    UnitForm,
+    ValueForm,
+)
 
 # Create your views here.
 
@@ -38,15 +49,15 @@ def vle(request):
     result_status = 0
     
     if request.method == 'POST':
-        if component_form.is_valid() == False:
+        if not component_form.is_valid():
             Message = "Please choose the components correctly!"
-        elif composition_form.is_valid() == False:
+        elif not composition_form.is_valid():
             Message = "Please choose the composition correctly!"
-        elif unit_form.is_valid() == False:
+        elif not unit_form.is_valid():
             Message = "Please choose the units correctly!"
-        elif value_form.is_valid() == False:
+        elif not value_form.is_valid():
             Message = "Please choose the values correctly!"
-        elif eos_form.is_valid() == False:
+        elif not eos_form.is_valid():
             Message = "Please choose the EoS Model correctly!"
         else:
             Message = "Data format OK. Starting the calculations..."
@@ -58,7 +69,7 @@ def vle(request):
             Pressure_value = value_form.cleaned_data['P_value']
             Eos_model = eos_form.cleaned_data['Eos_model']
             
-            if any(c.isalpha() for c in Composition) == False:
+            if not any(c.isalpha() for c in Composition):
                 Composition = [float(i) for i in Composition.split()]
                 input_data = {
                     "components": Components,
@@ -73,34 +84,34 @@ def vle(request):
                 try:            
                     V, x, y, P_bubl, P_dew, message_bubl, message_dew, message_initiate = main.main(input_data)
                     result_status = 1
-                except:
+                except Exception:
                     Message = "System is NOT defined!"
                     result_status = 2
                 
                 
-            elif any(c.isalpha() for c in Composition) == True:
+            elif any(c.isalpha() for c in Composition):
                 Message = "Enter the composition input with the right format."
     
     if result_status == 1:
         try:
             V = np.round(V, 4)  # ty: ignore[no-matching-overload]  (None when a step failed)
-        except:
+        except Exception:
             pass
         try:
             x = np.round(x, 4)  # ty: ignore[no-matching-overload]  (None when a step failed)
-        except:
+        except Exception:
             pass
         try:
             y = np.round(y, 4)  # ty: ignore[no-matching-overload]  (None when a step failed)
-        except:
+        except Exception:
             pass
         try:
             P_bubl = np.round(P_bubl, 4)  # ty: ignore[no-matching-overload]  (None when a step failed)
-        except:
+        except Exception:
             pass
         try:
             P_dew = np.round(P_dew, 4)  # ty: ignore[no-matching-overload]  (None when a step failed)
-        except:
+        except Exception:
             pass
         
     context = {
@@ -153,13 +164,13 @@ def pxy(request):
     result_status = 0
     
     if request.method == 'POST':
-        if component_form.is_valid() == False:
+        if not component_form.is_valid():
             Message = "Please choose the components correctly!"
-        elif temp_form.is_valid() == False:
+        elif not temp_form.is_valid():
             Message = "Please choose the values correctly!"
-        elif eos_form.is_valid() == False:
+        elif not eos_form.is_valid():
             Message = "Please choose the EoS Model correctly!"
-        elif node_form.is_valid() == False:
+        elif not node_form.is_valid():
             Message = "Please choose Node Number correctly!"
         else:
             Message = "Data format OK. Starting the calculations..."
@@ -181,7 +192,7 @@ def pxy(request):
                 try:            
                     fig, df = binaryPxy.visualize(Components, Tempreture_value, Eos_model, Node_number)
                     result_status = 1
-                except:
+                except Exception:
                     Message = "System is NOT defined!"
                     result_status = 2
 
@@ -231,15 +242,15 @@ def pt(request):
     result_status = 0
     
     if request.method == 'POST':
-        if component_form.is_valid() == False:
+        if not component_form.is_valid():
             Message = "Please choose the components correctly!"
-        elif composition_form.is_valid() == False:
+        elif not composition_form.is_valid():
             Message = "Please choose the composition correctly!"
-        elif temp_form.is_valid() == False:
+        elif not temp_form.is_valid():
             Message = "Please choose the values correctly!"
-        elif eos_form.is_valid() == False:
+        elif not eos_form.is_valid():
             Message = "Please choose the EoS Model correctly!"
-        elif gap_form.is_valid() == False:
+        elif not gap_form.is_valid():
             Message = "Please choose Gap Ratio Threshold correctly!"
         else:
             Message = "Data format OK. Starting the calculations..."
@@ -259,16 +270,16 @@ def pt(request):
                 Temperature_start = (Temperature_start-32)*(5/9) + 273.15
                 Temperature_end = (Temperature_end-32)*(5/9) + 273.15
             
-            if any(c.isalpha() for c in Composition) == False:
+            if not any(c.isalpha() for c in Composition):
                 Composition = [float(i) for i in Composition.split()]
                 try:            
                     fig = phaseEnvelope.plotter(Components, Composition, Eos_model, Temperature_start, Temperature_end, Temperature_step, Gap)
                     result_status = 1
-                except:
+                except Exception:
                     Message = "System is NOT defined!"
                     result_status = 2
                     
-            elif any(c.isalpha() for c in Composition) == True:
+            elif any(c.isalpha() for c in Composition):
                 Message = "Enter the composition input with the right format."
 
     context = {

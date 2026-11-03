@@ -1,5 +1,7 @@
 import numpy as np
+
 from .properties import prop
+
 
 def component_properties(components, T, eos_model):
     if isinstance(components, list):
@@ -22,7 +24,6 @@ def component_properties(components, T, eos_model):
             epsilon = 1 - np.sqrt(2)
             Omega = 0.07780
             Psi = 0.45724
-            Zc = 0.30740
             alpha = (1 + (0.37464 + 1.54226*omega - 0.2992*(omega)**2) * (1 - (Tr)**0.5))**2
             
         elif eos_model == "SRK":
@@ -30,7 +31,6 @@ def component_properties(components, T, eos_model):
             epsilon = 0
             Omega = 0.08664
             Psi = 0.42748
-            Zc = 0.334
             alpha = (1 + (0.480 + 1.547*omega - 0.176*(omega)**2) * (1 - (Tr)**0.5))**2
         
         a_i = Psi*R**2*Tc**2/Pc

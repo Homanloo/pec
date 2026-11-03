@@ -1,5 +1,7 @@
-from django.http import JsonResponse
 import json
+
+from django.http import JsonResponse
+
 from .brain import main
 
 
@@ -11,25 +13,25 @@ def get(request):
             V, x, y, P_bubl, P_dew, message_bubl, message_dew, message_initiate = main.main(input_data)
             try:
                 V = round(V, 4)
-            except:
+            except Exception:
                 pass
             try:
                 x = list(x)
                 x = [round(i, 4) for i in x]
-            except:
+            except Exception:
                 pass
             try:
                 y = list(y)
                 y = [round(i, 4) for i in y]
-            except:
+            except Exception:
                 pass
             try:
                 P_bubl = round(P_bubl, 4)
-            except:
+            except Exception:
                 pass
             try:
                 P_dew = round(P_dew, 4)
-            except:
+            except Exception:
                 pass
             Message = "Calculations completed without any error."
             response = {
@@ -44,7 +46,7 @@ def get(request):
                 "P_dew": P_dew,
             }
         
-        except:
+        except Exception:
             Message = "Caclculations can not be procced. Inputs are either invalid or in the wrong format."
             response = {
                 "Message": Message

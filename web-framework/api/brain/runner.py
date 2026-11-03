@@ -1,7 +1,5 @@
-from binaryPxy import visualize
-from phaseEnvelope import phase_envelope, plotter
 import matplotlib.pyplot as plt
-
+from phaseEnvelope import plotter
 
 z = [0.5, 0.5]
 components = ["propane", "n-butane"]

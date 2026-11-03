@@ -1,5 +1,6 @@
 from vle import outer_loop
 
+
 def main(input_data):
     """
     Doesn't have any use for any case other than the designed API.

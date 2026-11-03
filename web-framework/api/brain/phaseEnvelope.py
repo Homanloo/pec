@@ -1,8 +1,8 @@
+import matplotlib.pyplot as plt
+import numpy as np
+
 from .bublP import bubble_P
 from .dewP import dew_P
-import numpy as np
-import matplotlib.pyplot as plt
-
 
 
 def phase_envelope(components, z, eos_model, T_start, T_finish, T_step, gap_ratio_treshhold):

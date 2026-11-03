@@ -1,6 +1,6 @@
 from django import forms
-from .brain.properties import prop
 
+from .brain.properties import prop
 
 keys = prop.keys()
 COMPONENTS_LIST = ()

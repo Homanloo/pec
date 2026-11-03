@@ -1,7 +1,8 @@
 import numpy as np
-from .parameters import component_properties
+
 from .bublP import bubble_P
 from .dewP import dew_P
+from .parameters import component_properties
 from .phiCalc import Phi_calc_liquid, Phi_calc_vapor
 
 
