@@ -83,23 +83,23 @@ def vle(request):
     
     if result_status == 1:
         try:
-            V = np.round(V, 4)
+            V = np.round(V, 4)  # ty: ignore[no-matching-overload]  (None when a step failed)
         except:
             pass
         try:
-            x = np.round(x, 4)
+            x = np.round(x, 4)  # ty: ignore[no-matching-overload]  (None when a step failed)
         except:
             pass
         try:
-            y = np.round(y, 4)
+            y = np.round(y, 4)  # ty: ignore[no-matching-overload]  (None when a step failed)
         except:
             pass
         try:
-            P_bubl = np.round(P_bubl, 4)
+            P_bubl = np.round(P_bubl, 4)  # ty: ignore[no-matching-overload]  (None when a step failed)
         except:
             pass
         try:
-            P_dew = np.round(P_dew, 4)
+            P_dew = np.round(P_dew, 4)  # ty: ignore[no-matching-overload]  (None when a step failed)
         except:
             pass
         

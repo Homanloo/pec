@@ -48,3 +48,22 @@ omit = ["*/migrations/*", "*/tests.py", "web-framework/manage.py", "web-framewor
 
 [tool.coverage.report]
 fail_under = 75
+
+[tool.ruff]
+target-version = "py311"
+extend-exclude = ["*/migrations/*"]
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "I", "UP"]
+
+[tool.ty.environment]
+python-version = "3.11"
+root = ["web-framework", "tests"]
+
+[tool.ty.src]
+include = ["web-framework", "tests"]
+
+# purePVT shares its EOS parameters through module globals on purpose.
+[[tool.ty.overrides]]
+include = ["web-framework/*/brain/purePVT.py"]
+rules = { unresolved-global = "ignore" }
