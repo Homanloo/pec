@@ -109,9 +109,9 @@ A few samples of the results and possible outputs of the framework is as follows
 ## Install PEC on your computer <a name="6"></a>
 If you are a developer and want to customize or work on the existing project yourself, you can install PEC locally and use it on your computer:
 
- 1. Creat a virtual environment. For example, in Windows OS, open the cmd in a folder and type the command `python -m venv {any_name_you_like}`.
- 2. Activate the venv by `{any_name_you_like}\Scripts\activate`.
- 3. Install the requirements by using the `requirements.txt` file in the repository using `pip install -r requirements.txt`.
+ 1. Install [uv](https://docs.astral.sh/uv/getting-started/installation/) and [just](https://github.com/casey/just).
+ 2. Run `uv sync` in the repository. It creates `.venv` with the locked dependencies (add `--group notebooks` for Jupyter).
+ 3. Run `just` to list the commands: `just run` starts the site, `just check` runs lint, type check, tests and the audit.
 
 
  Now that your virtual environment is ready, you can use the modules directly in your code by cloning the repository to the folder you created the venv, or pasting the project folder manually.
