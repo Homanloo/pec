@@ -55,8 +55,7 @@ migrations:
 
 # Known vulnerabilities in the runtime dependencies (what ships in the image)
 audit:
-    uv export --frozen --no-dev --no-hashes --no-header --no-annotate -o .audit-requirements.txt
-    uv run pip-audit --disable-pip --no-deps -r .audit-requirements.txt; s=$?; rm -f .audit-requirements.txt; exit $s
+    tmp=$(mktemp) && uv export --frozen --no-dev --no-hashes --no-header --no-annotate -o "$tmp" && uv run pip-audit --disable-pip --no-deps -r "$tmp"; s=$?; rm -f "$tmp"; exit $s
 
 # ========================================
 # Postgres (as in CI), on port 25432
