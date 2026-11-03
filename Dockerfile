@@ -29,4 +29,6 @@ EXPOSE 8000
 
 # The database holds no app data (admin and sessions only), so it lives in
 # /tmp and is rebuilt on every start; the root filesystem can be read-only.
-CMD ["sh", "-c", "python manage.py migrate --noinput && exec gunicorn vleW1.wsgi:application --bind 0.0.0.0:8000 --workers 2 --timeout 120 --access-logfile -"]
+# --skip-checks: the checks import the whole science stack just to migrate.
+# --preload: the app (see wsgi.py) loads once, before the workers fork.
+CMD ["sh", "-c", "python manage.py migrate --noinput --skip-checks && exec gunicorn vleW1.wsgi:application --preload --bind 0.0.0.0:8000 --workers 2 --timeout 120 --access-logfile -"]
