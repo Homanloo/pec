@@ -15,16 +15,13 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 
 WORKDIR /app
 
-# Runtime only, exactly as locked: no dev tools, no notebooks. Bytecode is
-# compiled here: the root filesystem is read-only, so Python could never cache
-# it and would recompile numpy, scipy and matplotlib on every start.
+# Runtime only, exactly as locked: no dev tools, no notebooks.
 COPY pyproject.toml uv.lock .python-version ./
-RUN uv sync --frozen --no-dev --no-cache --compile-bytecode
+RUN uv sync --frozen --no-dev --no-cache
 
 COPY web-framework/ .
 RUN rm -f db.sqlite3 \
     && DJANGO_DEBUG=0 DJANGO_SECRET_KEY=build-only python manage.py collectstatic --noinput \
-    && python -m compileall -q . \
     && useradd --system --uid 10001 pec
 
 USER pec
