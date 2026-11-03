@@ -172,9 +172,9 @@ def tabulate(component, eos_model, node_number):
         elif eos_model == "SRK":
             sigma, epsilon, Omega, Psi, Zc, alpha = SRK_model(Tr, omega)
         elif eos_model == "VDW":
-            sigma, epsilon, Omega, Psi, Zc, alpha = VDW_model(Tr, omega)
+            sigma, epsilon, Omega, Psi, Zc, alpha = VDW_model(Tr)
         elif eos_model == "RK":
-            sigma, epsilon, Omega, Psi, Zc, alpha = RK_model(Tr, omega)
+            sigma, epsilon, Omega, Psi, Zc, alpha = RK_model(Tr)
             
         a_i, b_i, beta, q = eos_par_calc(P, T, Psi, alpha, Tc, Pc, Omega)
         
