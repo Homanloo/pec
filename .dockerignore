@@ -1,7 +1,0 @@
-.git
-.github
-**/__pycache__
-**/*.pyc
-web-framework/db.sqlite3
-web-framework/staticfiles
-modules
