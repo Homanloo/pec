@@ -4,4 +4,7 @@ __pycache__/
 .coverage
 coverage.xml
 htmlcov/
-web-framework/staticfiles/
+.pytest_cache/
+.ruff_cache/
+.hypothesis/
+dist/

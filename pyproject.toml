@@ -1,0 +1,47 @@
+# uv workspace root (not a package). Members live under backend/.
+[project]
+name = "pec-workspace"
+version = "0"
+requires-python = ">=3.15"
+dependencies = ["pec"]
+
+[tool.uv]
+package = false
+
+[tool.uv.workspace]
+members = ["backend/core"]
+
+[tool.uv.sources]
+pec = { workspace = true }
+
+[dependency-groups]
+dev = [
+    "pytest>=9.2",
+    "pytest-cov>=7.1",
+    "hypothesis>=6.170",
+    "ruff>=0.17",
+    "ty>=0.0.97",
+    "pip-audit>=2.10",
+]
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "W", "F", "I", "UP", "B", "SIM", "C4", "PT", "NPY", "RUF"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["pec"]
+
+[tool.ty.environment]
+python-version = "3.15"
+
+[tool.pytest.ini_options]
+testpaths = ["backend/core/tests"]
+addopts = ["--import-mode=importlib", "--strict-markers", "--cov=pec", "--cov-branch", "--cov-report=term-missing:skip-covered"]
+xfail_strict = true
+filterwarnings = ["error"]
+
+[tool.coverage.report]
+fail_under = 90
+exclude_also = ["if TYPE_CHECKING:", "raise NotImplementedError", "\\.\\.\\."]
