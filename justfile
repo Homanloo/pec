@@ -1,45 +1,30 @@
-# PEC — run `just` to list commands. CI runs the same recipes.
+# PEC: run `just` to list recipes. CI runs the same ones.
 
 set shell := ["bash", "-uc"]
-
-manage := "uv run python web-framework/manage.py"
-pg_url := "postgres://pec:pec@localhost:25432/pec"
 
 default:
     @just --list
 
-# ========================================
-# Setup & run
-# ========================================
-
-# Locked dependencies into .venv (add --group notebooks for Jupyter)
+# Locked dependencies: Python into .venv, the frontend's into frontend/node_modules
 install:
     uv sync --locked
-
-# Development server on http://localhost:8000
-run:
-    {{manage}} runserver
-
-# Any manage.py command: just manage createsuperuser
-manage *args:
-    {{manage}} {{args}}
-
-# ========================================
-# Checks
-# ========================================
+    npm --prefix frontend ci --no-fund --no-audit
 
 # Everything CI checks, in its order
-check: lint typecheck test migrations audit
+check: lint typecheck test front-check audit
 
+# Lint and format check
 lint:
     uv run ruff check .
+    uv run ruff format --check .
 
-# Apply ruff's safe fixes (import order, pyupgrade)
-fix:
+# Apply safe lint fixes and format
+fmt:
     uv run ruff check --fix .
+    uv run ruff format .
 
 typecheck:
-    uv run ty check
+    uv run ty check backend
 
 # Tests with coverage (fails under the floor in pyproject.toml)
 test *args:
@@ -49,40 +34,32 @@ test *args:
 cov:
     uv run pytest --cov-report=html && echo "open htmlcov/index.html"
 
-# No model change without its migration
-migrations:
-    {{manage}} makemigrations --check --dry-run
-
-# Known vulnerabilities in the runtime dependencies (what ships in the image)
+# Known vulnerabilities in the runtime dependencies (Python and the frontend's)
 audit:
-    tmp=$(mktemp) && uv export --frozen --no-dev --no-hashes --no-header --no-annotate -o "$tmp" && uv run pip-audit --disable-pip --no-deps -r "$tmp"; s=$?; rm -f "$tmp"; exit $s
+    tmp=$(mktemp) && uv export --frozen --no-dev --no-hashes --no-header --no-annotate --no-emit-workspace -o "$tmp" && uv run pip-audit --disable-pip --no-deps -r "$tmp"; s=$?; rm -f "$tmp"; exit $s
+    npm --prefix frontend audit --omit=dev
 
-# ========================================
-# Postgres (as in CI), on port 25432
-# ========================================
+# Frontend type check
+front-check:
+    npm --prefix frontend run check
 
-pg-up:
-    docker run -d --rm --name pec-pg -e POSTGRES_USER=pec -e POSTGRES_PASSWORD=pec -e POSTGRES_DB=pec -p 25432:5432 postgres:18
-    until docker exec pec-pg pg_isready -U pec -q; do sleep 1; done
-
-pg-down:
-    docker stop pec-pg
-
-# Tests and migrations against Postgres (just pg-up first)
-test-pg:
-    DATABASE_URL={{pg_url}} uv run pytest --create-db
-    DATABASE_URL={{pg_url}} {{manage}} migrate --noinput
-
-# ========================================
-# Image
-# ========================================
-
-# Build the production image as zig1 runs it (linux/amd64)
+# Build the frontend into frontend/dist (Django serves it from there)
 build:
-    docker build --platform linux/amd64 -t pec:local .
+    npm --prefix frontend run build
 
-# Run it hardened like production on http://localhost:18000
-serve: build
-    docker run --rm --platform linux/amd64 --read-only --tmpfs /tmp --cap-drop ALL \
-      --security-opt no-new-privileges -e DJANGO_DEBUG=0 -e DJANGO_SECRET_KEY=local \
-      -e DJANGO_ALLOWED_HOSTS=localhost -p 18000:8000 pec:local
+# The site on http://127.0.0.1:8000 (API + the last `just build`)
+web:
+    uv run python backend/web/manage.py runserver 127.0.0.1:8000
+
+# Frontend dev server with hot reload on http://127.0.0.1:5173 (needs `just web` for the API)
+front:
+    npm --prefix frontend run dev
+
+# The production image, run the way zig1 runs it: read-only, no capabilities, DEBUG off
+image:
+    docker build -t pec:local .
+
+serve: image
+    docker run --rm --name pec --read-only --tmpfs /tmp --cap-drop ALL \
+        --security-opt no-new-privileges -e DJANGO_DEBUG=0 -e DJANGO_SECRET_KEY=local \
+        -e DJANGO_ALLOWED_HOSTS=localhost,127.0.0.1 -p 8000:8000 pec:local

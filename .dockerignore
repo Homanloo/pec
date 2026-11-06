@@ -1,7 +1,12 @@
 .git
 .github
+.venv
 **/__pycache__
 **/*.pyc
-web-framework/db.sqlite3
-web-framework/staticfiles
-modules
+**/tests
+scripts
+staticfiles
+htmlcov
+.coverage
+frontend/node_modules
+frontend/dist

@@ -1,0 +1,15 @@
+[project]
+name = "pec"
+version = "0.1.0.dev0"
+description = "Phase equilibrium calculations with cubic equations of state"
+license = "MIT"
+authors = [{ name = "Mohammad Homanloo", email = "homanloom@gmail.com" }]
+requires-python = ">=3.15"
+dependencies = [
+    "numpy>=2.5",
+    "scipy>=1.18",
+]
+
+[build-system]
+requires = ["uv_build>=0.13,<0.14"]
+build-backend = "uv_build"

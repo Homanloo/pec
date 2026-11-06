@@ -1,71 +1,57 @@
+# uv workspace root (not a package). Members live under backend/.
 [project]
-name = "pec"
-version = "0.1.0"
-description = "Phase Equilibrium Calculator: VLE, P-x-y and P-T diagrams with the PR and SRK equations of state"
-readme = "README.md"
-license = "MIT"
-# numpy 1.25 has no wheels past Python 3.11.
-requires-python = ">=3.11,<3.12"
-dependencies = [
-    "django>=5.2.17,<5.3",
-    "matplotlib==3.7.2",
-    "numpy==1.25.2",
-    "pandas==2.0.3",
-    "scipy==1.11.1",
-    "whitenoise==6.7.0",
-    "gunicorn==23.0.0",
-    "dj-database-url>=3",
-    "psycopg[binary]>=3.2",
-]
-
-[dependency-groups]
-dev = [
-    "pytest",
-    "pytest-django",
-    "pytest-cov",
-    "ruff",
-    "ty",
-    "pip-audit",
-]
-notebooks = [
-    "jupyter==1.0.0",
-    "jupyterlab==4.0.4",
-]
+name = "pec-workspace"
+version = "0"
+requires-python = ">=3.15"
+dependencies = ["pec", "pec-web"]
 
 [tool.uv]
 package = false
 
-[tool.pytest.ini_options]
-DJANGO_SETTINGS_MODULE = "vleW1.settings"
-pythonpath = ["web-framework"]
-testpaths = ["tests"]
-addopts = "--cov --cov-report=term-missing:skip-covered"
-# collectstatic runs in the image, not before tests.
-filterwarnings = ["ignore:No directory at:UserWarning"]
+[tool.uv.workspace]
+members = ["backend/core", "backend/web"]
 
-[tool.coverage.run]
-source = ["web-framework"]
-branch = true
-omit = ["*/migrations/*", "*/tests.py", "web-framework/manage.py", "web-framework/vleW1/[aw]sgi.py"]
+[tool.uv.sources]
+pec = { workspace = true }
+pec-web = { workspace = true }
 
-[tool.coverage.report]
-fail_under = 75
+[dependency-groups]
+dev = [
+    "pytest>=9.2",
+    "pytest-cov>=7.1",
+    "ruff>=0.17",
+    "ty>=0.0.97",
+    "pip-audit>=2.10",
+    "chemicals>=1.5.2",
+    "thermo>=0.6.1",
+    "coolprop>=8.0.0",
+]
 
 [tool.ruff]
-target-version = "py311"
-extend-exclude = ["*/migrations/*"]
+line-length = 100
 
 [tool.ruff.lint]
-select = ["E4", "E7", "E9", "F", "I", "UP"]
+select = ["E", "W", "F", "I", "UP", "B", "SIM", "C4", "PT", "NPY", "RUF"]
+# SIM300 misreads module constants (constants.R == pytest.approx(...)) as Yoda conditions.
+# RUF001-003: Unicode math notation (σ, ε, φ̂, ×) is intentional in a science codebase.
+ignore = ["SIM300", "RUF001", "RUF002", "RUF003"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["pec", "pecweb"]
 
 [tool.ty.environment]
-python-version = "3.11"
-root = ["web-framework", "tests"]
+python-version = "3.15"
 
-[tool.ty.src]
-include = ["web-framework", "tests"]
+[tool.pytest.ini_options]
+testpaths = ["backend/core/tests", "backend/web/tests"]
+addopts = ["--import-mode=importlib", "--cov=pec", "--cov=pecweb", "--cov-report=term-missing:skip-covered"]
+# numpy warnings (overflow, invalid value) fail the test instead of hiding a NaN.
+# thermo (dev-only reference) leaves its CoolProp data file open; that one is not ours.
+filterwarnings = [
+    "error",
+    "ignore::ResourceWarning:thermo.coolprop",
+    "ignore:Exception ignored while finalizing file .*thermo/CoolPropFluids:pytest.PytestUnraisableExceptionWarning",
+]
 
-# purePVT shares its EOS parameters through module globals on purpose.
-[[tool.ty.overrides]]
-include = ["web-framework/*/brain/purePVT.py"]
-rules = { unresolved-global = "ignore" }
+[tool.coverage.report]
+fail_under = 90

@@ -12,7 +12,7 @@ concurrency:
   cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
 
 jobs:
-  lint:
+  check:
     if: github.event_name != 'schedule'
     runs-on: ubuntu-latest
     steps:
@@ -26,39 +26,24 @@ jobs:
       - run: uv sync --locked
       - run: just lint
       - run: just typecheck
+      - name: Tests with coverage
+        run: just test --cov-report=markdown-append:$GITHUB_STEP_SUMMARY
 
-  # Against Postgres, not SQLite: pytest-django builds the test database by
-  # running every migration, and the migrate step applies them to a real one.
-  test:
+  frontend:
     if: github.event_name != 'schedule'
     runs-on: ubuntu-latest
-    env:
-      DATABASE_URL: postgres://pec:pec@127.0.0.1:5432/pec
-    services:
-      postgres:
-        image: postgres:18
-        env: { POSTGRES_USER: pec, POSTGRES_PASSWORD: pec, POSTGRES_DB: pec }
-        ports: ["5432:5432"]
-        options: --health-cmd "pg_isready -U pec" --health-interval 5s --health-retries 10
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      - uses: astral-sh/setup-uv@07a047e608db84b3d8c06cd9a7c7dcc9c355c18e # v10.3.2
-      - uses: extractions/setup-just@53165ef7e734c5c07cb06b3c8e7b647c5aa16db3 # v4.0.0
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
-          just-version: 1.55.1
-      - run: uv sync --locked
-      - name: Tests with coverage
-        run: just test --cov-report=xml --cov-report=markdown-append:$GITHUB_STEP_SUMMARY
-      - name: Migrations apply to Postgres
-        run: just manage migrate --noinput
-      - name: No model change without its migration
-        run: just migrations
-      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
-        with:
-          name: coverage
-          path: coverage.xml
+          node-version: 24
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - run: npm --prefix frontend ci --no-fund --no-audit
+      - name: Type check and build
+        run: npm --prefix frontend run build
 
   audit:
     runs-on: ubuntu-latest
@@ -67,17 +52,20 @@ jobs:
         with:
           persist-credentials: false
       - uses: astral-sh/setup-uv@07a047e608db84b3d8c06cd9a7c7dcc9c355c18e # v10.3.2
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 24
       - uses: extractions/setup-just@53165ef7e734c5c07cb06b3c8e7b647c5aa16db3 # v4.0.0
         with:
           just-version: 1.55.1
       - run: uv sync --locked
       - run: just audit
 
-  # Every push builds the image and runs it the way zig1 does (read-only, no
-  # capabilities, DEBUG off). Only main publishes it, after every check passed.
+  # Every push builds the image and runs it the way zig1 does (read-only, no capabilities,
+  # DEBUG off). Only main publishes it, after every check passed.
   image:
     if: github.event_name != 'schedule'
-    needs: [lint, test, audit]
+    needs: [check, frontend, audit]
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -103,13 +91,14 @@ jobs:
           docker run -d --name pec --read-only --tmpfs /tmp --cap-drop ALL \
             --security-opt no-new-privileges -e DJANGO_DEBUG=0 \
             -e DJANGO_SECRET_KEY=ci -e DJANGO_ALLOWED_HOSTS=localhost -p 8000:8000 pec:ci
-          for i in $(seq 1 30); do curl -fsS -o /dev/null http://localhost:8000/ && break; sleep 1; done
-          for path in / /vle/ /pxy/ /pt/ /api/ /docs/ /static/style.css; do
+          for i in $(seq 1 30); do curl -fsS -o /dev/null http://localhost:8000/api/v1/health/ && break; sleep 1; done
+          asset=$(curl -fsS http://localhost:8000/ | grep -o '/static/assets/index-[^"]*\.js')
+          for path in / /flash /theory /api/v1/health/ /api/v1/components/ /api/schema/ /api/docs/ "$asset"; do
             curl -fsS -o /dev/null -w "$path %{http_code}\n" "http://localhost:8000$path"
           done
-          curl -fsS -X GET http://localhost:8000/get/ \
-            -d '{"components":["nitrogen","methane"],"z":[0.4,0.6],"T_unit":"K","P_unit":"bar","T":150,"P":20,"eos_model":"PR"}' \
-            | grep -q '"V": 0.8038'
+          curl -fsS -X POST http://localhost:8000/api/v1/flash/ -H "Content-Type: application/json" \
+            -d '{"components":["Methane","Ethane","n-Propane","n-Butane","n-Pentane"],"z":[0.4,0.2,0.15,0.15,0.1],"T":300,"P":3e6}' \
+            | python3 -c 'import json,sys; r=json.load(sys.stdin); assert [p["name"] for p in r["phases"]]==["liquid","vapour"], r; print("flash", r["phases"][1]["fraction"])'
       - name: Container logs
         if: failure()
         run: docker logs pec
