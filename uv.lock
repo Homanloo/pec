@@ -408,6 +408,7 @@ dev = [
     { name = "pytest" },
     { name = "pytest-cov" },
     { name = "ruff" },
+    { name = "thermo" },
     { name = "ty" },
 ]
 
@@ -421,6 +422,7 @@ dev = [
     { name = "pytest", specifier = ">=9.2" },
     { name = "pytest-cov", specifier = ">=7.1" },
     { name = "ruff", specifier = ">=0.17" },
+    { name = "thermo", specifier = ">=0.6.1" },
     { name = "ty", specifier = ">=0.0.97" },
 ]
 
@@ -660,6 +662,21 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/e8/c4/ba2f8066cceb6f23394729afe52f3bf7adec04bf9ed2c820b39e19299111/sortedcontainers-2.4.0.tar.gz", hash = "sha256:25caa5a06cc30b6b83d11423433f65d1f9d76c4c6a0c90e3379eaa43b9bfdb88", size = 30594, upload-time = "2021-05-16T22:03:42.897Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/32/46/9cb0e58b2deb7f82b84065f37f3bffeb12413f947f9388e4cac22c4621ce/sortedcontainers-2.4.0-py2.py3-none-any.whl", hash = "sha256:a163dcaede0f1c021485e957a39245190e74249897e2ae4b2aa38595db237ee0", size = 29575, upload-time = "2021-05-16T22:03:41.177Z" },
+]
+
+[[package]]
+name = "thermo"
+version = "0.6.1"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "chemicals" },
+    { name = "fluids" },
+    { name = "pandas" },
+    { name = "scipy" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/23/80/537b463a4fcdb45d9035d3fb865474c440a817dad1edf03602dd7fa41d99/thermo-0.6.1.tar.gz", hash = "sha256:35ad523c54d54d91d8aaf8be0c68a628fb17cfae76fffe02d8e543facbef9e18", size = 7071937, upload-time = "2026-07-13T02:22:41.494Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/16/e2/64dae8ca4cd2318a49428222646618318def328d2ebe7d64d77aeb12be26/thermo-0.6.1-py3-none-any.whl", hash = "sha256:0c16937885feddcb0d4d1589b4ebdef22c186302a83fbac7ed51fc252a451048", size = 6399201, upload-time = "2026-07-13T02:22:38.996Z" },
 ]
 
 [[package]]
