@@ -23,6 +23,7 @@ dev = [
     "pip-audit>=2.10",
     "chemicals>=1.5.2",
     "thermo>=0.6.1",
+    "coolprop>=8.0.0",
 ]
 
 [tool.ruff]
