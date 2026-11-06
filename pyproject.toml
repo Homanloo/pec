@@ -45,7 +45,12 @@ python-version = "3.15"
 testpaths = ["backend/core/tests"]
 addopts = ["--import-mode=importlib", "--cov=pec", "--cov-report=term-missing:skip-covered"]
 # numpy warnings (overflow, invalid value) fail the test instead of hiding a NaN.
-filterwarnings = ["error"]
+# thermo (dev-only reference) leaves its CoolProp data file open; that one is not ours.
+filterwarnings = [
+    "error",
+    "ignore::ResourceWarning:thermo.coolprop",
+    "ignore:Exception ignored while finalizing file .*thermo/CoolPropFluids:pytest.PytestUnraisableExceptionWarning",
+]
 
 [tool.coverage.report]
 fail_under = 90
