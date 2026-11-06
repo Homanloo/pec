@@ -60,7 +60,13 @@ def z_roots(sigma, eps, A, B):
 
     Z³ + [(σ+ε−1)B − 1]Z² + [A + σεB² − (σ+ε)B(B+1)]Z − [AB + σεB²(B+1)] = 0,
     with A = aP/(RT)² and B = bP/(RT). Roots with Z ≤ B have V ≤ b and are not physical.
-    Solved in closed form (Press et al., 2007, Numerical Recipes, 3rd ed., §5.6).
+
+    The largest root comes from the closed form (Press et al., 2007, Numerical Recipes, 3rd ed.,
+    §5.6), polished by Newton. The other two come from the remaining quadratic, whose
+    coefficients follow from Vieta's relations without cancellation:
+    z₂z₃ = −c₀/z₁ and z₂ + z₃ = (c₁ − z₂z₃)/z₁. This keeps small liquid roots accurate at low
+    pressure, where the closed form alone loses them (its discriminant scales with the squared
+    root spacing, ~1e-22 at P ~ 1e-3 Pa, and rounds to the wrong sign).
     """
     c2 = (sigma + eps - 1) * B - 1
     c1 = A + sigma * eps * B**2 - (sigma + eps) * B * (B + 1)
@@ -69,16 +75,41 @@ def z_roots(sigma, eps, A, B):
     Q = (c2**2 - 3 * c1) / 9
     Rc = (2 * c2**3 - 9 * c2 * c1 + 27 * c0) / 54
     if Rc**2 < Q**3:
-        # Three real roots: trigonometric form
+        # Three real roots: trigonometric form; take the largest
         theta = math.acos(Rc / Q**1.5)
-        roots = [
-            -2 * math.sqrt(Q) * math.cos((theta + k * 2 * math.pi) / 3) - c2 / 3 for k in (0, 1, -1)
-        ]
+        Z1 = max(-2 * math.sqrt(Q) * math.cos((theta + k * 2 * math.pi) / 3) for k in (0, 1, -1))
+        Z1 -= c2 / 3
     else:
         # One real root (or a multiple one, e.g. at the critical point, where S can be 0)
         S = -math.copysign((abs(Rc) + math.sqrt(Rc**2 - Q**3)) ** (1 / 3), Rc)
-        roots = [S + (Q / S if S != 0 else 0.0) - c2 / 3]
+        Z1 = S + (Q / S if S != 0 else 0.0) - c2 / 3
+    Z1 = _polish(Z1, c2, c1, c0)
+    roots = [Z1]
+
+    # Remaining quadratic Z² + pZ + q = 0, solved in the stable form t = −(p + sign(p)√D)/2,
+    # roots t and q/t (Press et al., 2007, §5.6). D < 0: the other two roots are complex.
+    q = -c0 / Z1
+    p = -(c1 - q) / Z1
+    D = p * p - 4 * q
+    if D >= 0:
+        t = -(p + math.copysign(math.sqrt(D), p)) / 2
+        roots += [_polish(t, c2, c1, c0)] + ([_polish(q / t, c2, c1, c0)] if t != 0 else [])
     return sorted(Z for Z in roots if Z > B)
+
+
+def _polish(Z, c2, c1, c0):
+    """A few Newton steps on the cubic, each kept only if it lowers |p(Z)| (so a step near a
+    double root, where p'(Z) ≈ 0, cannot throw the root away)."""
+    for _ in range(3):
+        p = ((Z + c2) * Z + c1) * Z + c0
+        dp = (3 * Z + 2 * c2) * Z + c1
+        if dp == 0:
+            break
+        Z_new = Z - p / dp
+        if abs(((Z_new + c2) * Z_new + c1) * Z_new + c0) >= abs(p):
+            break
+        Z = Z_new
+    return Z
 
 
 def _I(Z, B, sigma, eps):
