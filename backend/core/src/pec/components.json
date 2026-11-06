@@ -1,0 +1,920 @@
+{
+ "1-Butene": {
+  "cas": "106-98-9",
+  "formula": "C4H8",
+  "molar_mass": 0.05610632,
+  "Tc": 419.29,
+  "Pc": 4005724,
+  "omega": 0.19193,
+  "source": "Lemmon-FPE-2005"
+ },
+ "Acetone": {
+  "cas": "67-64-1",
+  "formula": "C3H6O",
+  "molar_mass": 0.05807914,
+  "Tc": 508.1,
+  "Pc": 4692417,
+  "omega": 0.3064,
+  "source": "Lemmon-JCED-2006"
+ },
+ "Ammonia": {
+  "cas": "7664-41-7",
+  "formula": "H3N",
+  "molar_mass": 0.01703052,
+  "Tc": 405.56,
+  "Pc": 11363391,
+  "omega": 0.25569,
+  "source": "Gao-JPCRD-2020"
+ },
+ "Argon": {
+  "cas": "7440-37-1",
+  "formula": "Ar",
+  "molar_mass": 0.039948,
+  "Tc": 150.687,
+  "Pc": 4863001,
+  "omega": -0.00219,
+  "source": "Tegeler-JPCRD-1999"
+ },
+ "Benzene": {
+  "cas": "71-43-2",
+  "formula": "C6H6",
+  "molar_mass": 0.0781118,
+  "Tc": 562.02,
+  "Pc": 4906289,
+  "omega": 0.21084,
+  "source": "Thol-HTHP-2012"
+ },
+ "CarbonDioxide": {
+  "cas": "124-38-9",
+  "formula": "CO2",
+  "molar_mass": 0.0440098,
+  "Tc": 304.128,
+  "Pc": 7377298,
+  "omega": 0.22492,
+  "source": "Span-JPCRD-1996"
+ },
+ "CarbonMonoxide": {
+  "cas": "630-08-0",
+  "formula": "CO",
+  "molar_mass": 0.0280101,
+  "Tc": 132.86,
+  "Pc": 3498195,
+  "omega": 0.05026,
+  "source": "Lemmon-JCED-2006"
+ },
+ "CarbonylSulfide": {
+  "cas": "463-58-1",
+  "formula": "COS",
+  "molar_mass": 0.0600751,
+  "Tc": 378.77,
+  "Pc": 6368800,
+  "omega": 0.0977,
+  "source": "Lemmon-JCED-2006"
+ },
+ "Chlorine": {
+  "cas": "7782-50-5",
+  "formula": "Cl2",
+  "molar_mass": 0.070906,
+  "Tc": 416.865,
+  "Pc": 7642374,
+  "omega": 0.06998,
+  "source": "Thol-AICHE-2021"
+ },
+ "cis-2-Butene": {
+  "cas": "590-18-1",
+  "formula": "C4H8",
+  "molar_mass": 0.05610632,
+  "Tc": 435.75,
+  "Pc": 4236038,
+  "omega": 0.20344,
+  "source": "Lemmon-FPE-2005"
+ },
+ "CycloHexane": {
+  "cas": "110-82-7",
+  "formula": "C6H12",
+  "molar_mass": 0.08415948,
+  "Tc": 553.6,
+  "Pc": 4080526,
+  "omega": 0.20957,
+  "source": "Zhou-JPCRD-2014"
+ },
+ "Cyclopentane": {
+  "cas": "287-92-3",
+  "formula": "C5H10",
+  "molar_mass": 0.0701329,
+  "Tc": 511.72,
+  "Pc": 4582766,
+  "omega": 0.20193,
+  "source": "Gedanitz-JCED-2015"
+ },
+ "CycloPropane": {
+  "cas": "75-19-4",
+  "formula": "C3H6",
+  "molar_mass": 0.042081,
+  "Tc": 398.692,
+  "Pc": 5605283,
+  "omega": 0.12881,
+  "source": "Polt-CT-1992"
+ },
+ "D4": {
+  "cas": "556-67-2",
+  "formula": "C8H24O4Si4",
+  "molar_mass": 0.29661576,
+  "Tc": 586.5,
+  "Pc": 1347215,
+  "omega": 0.59812,
+  "source": "Thol-THESIS-2015"
+ },
+ "D5": {
+  "cas": "541-02-6",
+  "formula": "C10H30O5Si5",
+  "molar_mass": 0.3707697,
+  "Tc": 618.3,
+  "Pc": 1077688,
+  "omega": 0.63094,
+  "source": "Thol-FPE-2019-siloxanes"
+ },
+ "Deuterium": {
+  "cas": "7782-39-0",
+  "formula": "D2",
+  "molar_mass": 0.0040282,
+  "Tc": 38.34,
+  "Pc": 1679550,
+  "omega": -0.1363,
+  "source": "Richardson-JPCRD-2013"
+ },
+ "Dichloroethane": {
+  "cas": "107-06-2",
+  "formula": "C2H4Cl2",
+  "molar_mass": 0.098959,
+  "Tc": 561.58,
+  "Pc": 5226121,
+  "omega": 0.26861,
+  "source": "Thol-THESIS-2015"
+ },
+ "DiethylEther": {
+  "cas": "60-29-7",
+  "formula": "C4H10O",
+  "molar_mass": 0.0741216,
+  "Tc": 467.9,
+  "Pc": 3717321,
+  "omega": 0.27876,
+  "source": "Thol-IJT-2014"
+ },
+ "DimethylCarbonate": {
+  "cas": "616-38-6",
+  "formula": "C3H6O3",
+  "molar_mass": 0.0900779,
+  "Tc": 557.0,
+  "Pc": 4908755,
+  "omega": 0.34613,
+  "source": "Zhou-JPCRD-2011"
+ },
+ "DimethylEther": {
+  "cas": "115-10-6",
+  "formula": "C2H6O",
+  "molar_mass": 0.04606844,
+  "Tc": 400.378,
+  "Pc": 5336665,
+  "omega": 0.19613,
+  "source": "Wu-JPCRD-2011"
+ },
+ "Ethane": {
+  "cas": "74-84-0",
+  "formula": "C2H6",
+  "molar_mass": 0.03006904,
+  "Tc": 305.322,
+  "Pc": 4872200,
+  "omega": 0.09951,
+  "source": "Buecker-JPCRD-2006"
+ },
+ "Ethanol": {
+  "cas": "64-17-5",
+  "formula": "C2H6O",
+  "molar_mass": 0.04606844,
+  "Tc": 514.709,
+  "Pc": 6267915,
+  "omega": 0.64611,
+  "source": "Schroeder-JPCRD-2014"
+ },
+ "EthylBenzene": {
+  "cas": "100-41-4",
+  "formula": "C8H10",
+  "molar_mass": 0.106165,
+  "Tc": 617.12,
+  "Pc": 3622442,
+  "omega": 0.30504,
+  "source": "Zhou-JPCRD-2012"
+ },
+ "Ethylene": {
+  "cas": "74-85-1",
+  "formula": "C2H4",
+  "molar_mass": 0.02805376,
+  "Tc": 282.35,
+  "Pc": 5041692,
+  "omega": 0.08656,
+  "source": "Smukala-JPCRD-2000"
+ },
+ "EthyleneOxide": {
+  "cas": "75-21-8",
+  "formula": "C2H4O",
+  "molar_mass": 0.04405256,
+  "Tc": 468.92,
+  "Pc": 7304687,
+  "omega": 0.2102,
+  "source": "Thol-CES-2015,Thol-CES-2015-CORR,Thol-THESIS-2015"
+ },
+ "Fluorine": {
+  "cas": "7782-41-4",
+  "formula": "F2",
+  "molar_mass": 0.03799681,
+  "Tc": 144.414,
+  "Pc": 5239517,
+  "omega": 0.05049,
+  "source": "deReuck-BOOK-1990"
+ },
+ "HeavyWater": {
+  "cas": "7789-20-0",
+  "formula": "D2O",
+  "molar_mass": 0.020027508,
+  "Tc": 643.847,
+  "Pc": 21661831,
+  "omega": 0.36422,
+  "source": "Herrig-JPCRD-2019"
+ },
+ "Helium": {
+  "cas": "7440-59-7",
+  "formula": "He",
+  "molar_mass": 0.004002602,
+  "Tc": 5.195,
+  "Pc": 228323,
+  "omega": -0.38355,
+  "source": "OrtizVega-JPCRD-2019"
+ },
+ "Hydrogen": {
+  "cas": "1333-74-0",
+  "formula": "H2",
+  "molar_mass": 0.00201588,
+  "Tc": 33.144,
+  "Pc": 1296358,
+  "omega": -0.21865,
+  "source": "Leachman-JPCRD-2009"
+ },
+ "HydrogenChloride": {
+  "cas": "7647-01-0",
+  "formula": "ClH",
+  "molar_mass": 0.0364609,
+  "Tc": 324.68,
+  "Pc": 8313509,
+  "omega": 0.12931,
+  "source": "Thol-JCED-2018-HCl"
+ },
+ "HydrogenSulfide": {
+  "cas": "7783-06-4",
+  "formula": "H2S",
+  "molar_mass": 0.03408088,
+  "Tc": 373.101,
+  "Pc": 8998872,
+  "omega": 0.10042,
+  "source": "Lemmon-JCED-2006"
+ },
+ "IsoButane": {
+  "cas": "75-28-5",
+  "formula": "C4H10",
+  "molar_mass": 0.0581222,
+  "Tc": 407.81,
+  "Pc": 3629000,
+  "omega": 0.18354,
+  "source": "Buecker-JPCRD-2006B"
+ },
+ "IsoButene": {
+  "cas": "115-11-7",
+  "formula": "C4H8",
+  "molar_mass": 0.05610632,
+  "Tc": 418.09,
+  "Pc": 4015707,
+  "omega": 0.19323,
+  "source": "Lemmon-FPE-2005"
+ },
+ "Isohexane": {
+  "cas": "107-83-5",
+  "formula": "C6H14",
+  "molar_mass": 0.08617536,
+  "Tc": 497.701,
+  "Pc": 3042659,
+  "omega": 0.28005,
+  "source": "Lemmon-JCED-2006"
+ },
+ "Isopentane": {
+  "cas": "78-78-4",
+  "formula": "C5H12",
+  "molar_mass": 0.07214878,
+  "Tc": 460.35,
+  "Pc": 3378217,
+  "omega": 0.22746,
+  "source": "Lemmon-JCED-2006"
+ },
+ "Krypton": {
+  "cas": "7439-90-9",
+  "formula": "Kr",
+  "molar_mass": 0.083798,
+  "Tc": 209.48,
+  "Pc": 5525432,
+  "omega": -0.00085,
+  "source": "Lemmon-JCED-2006"
+ },
+ "m-Xylene": {
+  "cas": "108-38-3",
+  "formula": "C8H10",
+  "molar_mass": 0.106165,
+  "Tc": 616.89,
+  "Pc": 3534599,
+  "omega": 0.32611,
+  "source": "Zhou-JPCRD-2012"
+ },
+ "MD4M": {
+  "cas": "107-52-8",
+  "formula": "C14H42O5Si6",
+  "molar_mass": 0.45899328,
+  "Tc": 653.2,
+  "Pc": 828559,
+  "omega": 0.80006,
+  "source": "Thol-FPE-2019-siloxanes"
+ },
+ "MDM": {
+  "cas": "107-51-7",
+  "formula": "C8H24O2Si3",
+  "molar_mass": 0.23653146,
+  "Tc": 565.361,
+  "Pc": 1437538,
+  "omega": 0.52426,
+  "source": "Thol-JCED-2017-siloxanes"
+ },
+ "Methane": {
+  "cas": "74-82-8",
+  "formula": "CH4",
+  "molar_mass": 0.0160428,
+  "Tc": 190.564,
+  "Pc": 4599200,
+  "omega": 0.01142,
+  "source": "Setzmann-JPCRD-1991"
+ },
+ "Methanol": {
+  "cas": "67-56-1",
+  "formula": "CH4O",
+  "molar_mass": 0.03204216,
+  "Tc": 513.38,
+  "Pc": 8215853,
+  "omega": 0.56248,
+  "source": "deReuck-BOOK-1993"
+ },
+ "MM": {
+  "cas": "107-46-0",
+  "formula": "C6H18OSi2",
+  "molar_mass": 0.16237752,
+  "Tc": 518.7,
+  "Pc": 1931134,
+  "omega": 0.41802,
+  "source": "Thol-FPE-2016-MM,Thol-THESIS-2015"
+ },
+ "n-Butane": {
+  "cas": "106-97-8",
+  "formula": "C4H10",
+  "molar_mass": 0.0581222,
+  "Tc": 425.125,
+  "Pc": 3796000,
+  "omega": 0.20081,
+  "source": "Buecker-JPCRD-2006B"
+ },
+ "n-Decane": {
+  "cas": "124-18-5",
+  "formula": "C10H22",
+  "molar_mass": 0.14228168,
+  "Tc": 617.699,
+  "Pc": 2101337,
+  "omega": 0.48802,
+  "source": "Lemmon-JCED-2006"
+ },
+ "n-Dodecane": {
+  "cas": "112-40-3",
+  "formula": "C12H26",
+  "molar_mass": 0.17033484,
+  "Tc": 658.1,
+  "Pc": 1817570,
+  "omega": 0.57432,
+  "source": "Lemmon-EF-2004"
+ },
+ "n-Heptane": {
+  "cas": "142-82-5",
+  "formula": "C7H16",
+  "molar_mass": 0.100202,
+  "Tc": 541.226,
+  "Pc": 2773824,
+  "omega": 0.34601,
+  "source": "Span-IJT-2003B"
+ },
+ "n-Hexane": {
+  "cas": "110-54-3",
+  "formula": "C6H14",
+  "molar_mass": 0.08617536,
+  "Tc": 507.82,
+  "Pc": 3044115,
+  "omega": 0.30032,
+  "source": "Thol-FPE-2019-alkanes-hexane"
+ },
+ "n-Nonane": {
+  "cas": "111-84-2",
+  "formula": "C9H20",
+  "molar_mass": 0.1282551,
+  "Tc": 594.548,
+  "Pc": 2281911,
+  "omega": 0.44345,
+  "source": "Lemmon-JCED-2006"
+ },
+ "n-Octane": {
+  "cas": "111-65-9",
+  "formula": "C8H18",
+  "molar_mass": 0.114229,
+  "Tc": 568.74,
+  "Pc": 2483591,
+  "omega": 0.39753,
+  "source": "Beckmueller-IJT-2019-octane"
+ },
+ "n-Pentane": {
+  "cas": "109-66-0",
+  "formula": "C5H12",
+  "molar_mass": 0.07214878,
+  "Tc": 469.7,
+  "Pc": 3367519,
+  "omega": 0.25103,
+  "source": "Thol-FPE-2019-alkanes-pentane"
+ },
+ "n-Perfluorobutane": {
+  "cas": "355-25-9",
+  "formula": "C4F10",
+  "molar_mass": 0.238027,
+  "Tc": 386.326,
+  "Pc": 2322379,
+  "omega": 0.37238,
+  "source": "Gao-2022-CxFy"
+ },
+ "n-Perfluoropentane": {
+  "cas": "678-26-2",
+  "formula": "C5F12",
+  "molar_mass": 0.288034,
+  "Tc": 421.0,
+  "Pc": 2062913,
+  "omega": 0.43613,
+  "source": "Gao-2022-CxFy"
+ },
+ "n-Propane": {
+  "cas": "74-98-6",
+  "formula": "C3H8",
+  "molar_mass": 0.04409562,
+  "Tc": 369.89,
+  "Pc": 4251165,
+  "omega": 0.15214,
+  "source": "Lemmon-JCED-2009"
+ },
+ "n-Undecane": {
+  "cas": "1120-21-4",
+  "formula": "C11H24",
+  "molar_mass": 0.15630826,
+  "Tc": 638.8,
+  "Pc": 1990452,
+  "omega": 0.53904,
+  "source": "Aleksandrov-TE-2011"
+ },
+ "Neon": {
+  "cas": "7440-01-9",
+  "formula": "Ne",
+  "molar_mass": 0.020179,
+  "Tc": 44.4,
+  "Pc": 2661631,
+  "omega": -0.03549,
+  "source": "Thol-JPCRD-2019-Neon"
+ },
+ "Neopentane": {
+  "cas": "463-82-1",
+  "formula": "C5H12",
+  "molar_mass": 0.07214878,
+  "Tc": 433.74,
+  "Pc": 3196297,
+  "omega": 0.19613,
+  "source": "Lemmon-JCED-2006"
+ },
+ "Nitrogen": {
+  "cas": "7727-37-9",
+  "formula": "N2",
+  "molar_mass": 0.02801348,
+  "Tc": 126.192,
+  "Pc": 3395800,
+  "omega": 0.03723,
+  "source": "Span-JPCRD-2000"
+ },
+ "NitrousOxide": {
+  "cas": "10024-97-2",
+  "formula": "N2O",
+  "molar_mass": 0.0440128,
+  "Tc": 309.521,
+  "Pc": 7244817,
+  "omega": 0.16217,
+  "source": "Lemmon-JCED-2006"
+ },
+ "o-Xylene": {
+  "cas": "95-47-6",
+  "formula": "C8H10",
+  "molar_mass": 0.106165,
+  "Tc": 630.259,
+  "Pc": 3737460,
+  "omega": 0.31176,
+  "source": "Zhou-JPCRD-2012"
+ },
+ "Oxygen": {
+  "cas": "7782-44-7",
+  "formula": "O2",
+  "molar_mass": 0.0319988,
+  "Tc": 154.599,
+  "Pc": 5046411,
+  "omega": 0.02207,
+  "source": "Schmidt-FPE-1985,Stewart-JPCRD-1991"
+ },
+ "p-Xylene": {
+  "cas": "106-42-3",
+  "formula": "C8H10",
+  "molar_mass": 0.106165,
+  "Tc": 616.168,
+  "Pc": 3531521,
+  "omega": 0.32403,
+  "source": "Zhou-JPCRD-2012"
+ },
+ "Propylene": {
+  "cas": "115-07-1",
+  "formula": "C3H6",
+  "molar_mass": 0.04207974,
+  "Tc": 364.211,
+  "Pc": 4554993,
+  "omega": 0.14606,
+  "source": "Lemmon-PROPYLENE-2013"
+ },
+ "Propyne": {
+  "cas": "74-99-7",
+  "formula": "C3H4",
+  "molar_mass": 0.04006,
+  "Tc": 402.701,
+  "Pc": 5657503,
+  "omega": 0.20288,
+  "source": "Polt-CT-1992"
+ },
+ "R11": {
+  "cas": "75-69-4",
+  "formula": "CCl3F",
+  "molar_mass": 0.137368,
+  "Tc": 471.11,
+  "Pc": 4407638,
+  "omega": 0.18875,
+  "source": "Jacobsen-FPE-1992"
+ },
+ "R113": {
+  "cas": "76-13-1",
+  "formula": "C2Cl3F3",
+  "molar_mass": 0.187375,
+  "Tc": 487.21,
+  "Pc": 3392266,
+  "omega": 0.25254,
+  "source": "Marx-BOOK-1992"
+ },
+ "R1130(E)": {
+  "cas": "156-60-5",
+  "formula": "C2H2Cl2",
+  "molar_mass": 0.09694328,
+  "Tc": 515.69,
+  "Pc": 5255464,
+  "omega": 0.19436,
+  "source": "Huber-IJT-2025-R1130E"
+ },
+ "R114": {
+  "cas": "76-14-2",
+  "formula": "C2Cl2F4",
+  "molar_mass": 0.170921,
+  "Tc": 420.608,
+  "Pc": 3352482,
+  "omega": 0.24686,
+  "source": "Platzer-BOOK-1990"
+ },
+ "R115": {
+  "cas": "76-15-3",
+  "formula": "C2ClF5",
+  "molar_mass": 0.154466416,
+  "Tc": 353.102,
+  "Pc": 3129171,
+  "omega": 0.24843,
+  "source": "Lemmon-JCED-2016-365227"
+ },
+ "R116": {
+  "cas": "76-16-4",
+  "formula": "C2F6",
+  "molar_mass": 0.13801182,
+  "Tc": 293.03,
+  "Pc": 3047660,
+  "omega": 0.25655,
+  "source": "Lemmon-JCED-2006"
+ },
+ "R12": {
+  "cas": "75-71-8",
+  "formula": "CCl2F2",
+  "molar_mass": 0.120913,
+  "Tc": 385.12,
+  "Pc": 4136166,
+  "omega": 0.17949,
+  "source": "Marx-BOOK-1992"
+ },
+ "R123": {
+  "cas": "306-83-2",
+  "formula": "C2HCl2F3",
+  "molar_mass": 0.152931,
+  "Tc": 456.83,
+  "Pc": 3661805,
+  "omega": 0.28193,
+  "source": "Younglove-JPCRD-1994"
+ },
+ "R124": {
+  "cas": "2837-89-0",
+  "formula": "C2HClF4",
+  "molar_mass": 0.1364762,
+  "Tc": 395.428,
+  "Pc": 3624483,
+  "omega": 0.28809,
+  "source": "deVries-ICR-1995"
+ },
+ "R1243zf": {
+  "cas": "677-21-4",
+  "formula": "C3H3F3",
+  "molar_mass": 0.09605113,
+  "Tc": 376.93,
+  "Pc": 3513667,
+  "omega": 0.2595,
+  "source": "Akasaka-IJT-2025-R1243zf"
+ },
+ "R125": {
+  "cas": "354-33-6",
+  "formula": "C2HF5",
+  "molar_mass": 0.1200214,
+  "Tc": 339.177,
+  "Pc": 3618276,
+  "omega": 0.30524,
+  "source": "Lemmon-JPCRD-2005"
+ },
+ "R13": {
+  "cas": "75-72-9",
+  "formula": "CClF3",
+  "molar_mass": 0.104459,
+  "Tc": 303.05,
+  "Pc": 3973109,
+  "omega": 0.17046,
+  "source": "Platzer-BOOK-1990"
+ },
+ "R134a": {
+  "cas": "811-97-2",
+  "formula": "C2H2F4",
+  "molar_mass": 0.102032,
+  "Tc": 374.212,
+  "Pc": 4059276,
+  "omega": 0.32682,
+  "source": "TillnerRoth-JPCRD-1994"
+ },
+ "R13I1": {
+  "cas": "2314-97-8",
+  "formula": "CF3I",
+  "molar_mass": 0.1959104,
+  "Tc": 396.44,
+  "Pc": 3952545,
+  "omega": 0.17618,
+  "source": "Lemmon-JCED-2016-365227"
+ },
+ "R14": {
+  "cas": "75-73-0",
+  "formula": "CF4",
+  "molar_mass": 0.0880046,
+  "Tc": 227.396,
+  "Pc": 3762456,
+  "omega": 0.18197,
+  "source": "Platzer-BOOK-1990"
+ },
+ "R141b": {
+  "cas": "1717-00-6",
+  "formula": "C2H3Cl2F",
+  "molar_mass": 0.11694962,
+  "Tc": 477.5,
+  "Pc": 4211652,
+  "omega": 0.21948,
+  "source": "Lemmon-JCED-2006"
+ },
+ "R142b": {
+  "cas": "75-68-3",
+  "formula": "C2H3ClF2",
+  "molar_mass": 0.10049503,
+  "Tc": 410.26,
+  "Pc": 4054783,
+  "omega": 0.23204,
+  "source": "Lemmon-JCED-2006"
+ },
+ "R143a": {
+  "cas": "420-46-2",
+  "formula": "C2H3F3",
+  "molar_mass": 0.084041,
+  "Tc": 345.857,
+  "Pc": 3761818,
+  "omega": 0.26158,
+  "source": "LemmonJacobsen-JPCRD-2000"
+ },
+ "R152A": {
+  "cas": "75-37-6",
+  "formula": "C2H4F2",
+  "molar_mass": 0.066051,
+  "Tc": 386.411,
+  "Pc": 4516750,
+  "omega": 0.27522,
+  "source": "Outcalt-JPCRD-1996-R152A"
+ },
+ "R161": {
+  "cas": "353-36-6",
+  "formula": "C2H5F",
+  "molar_mass": 0.0480595,
+  "Tc": 375.25,
+  "Pc": 5009983,
+  "omega": 0.21624,
+  "source": "Wu-IJT-2012"
+ },
+ "R21": {
+  "cas": "75-43-4",
+  "formula": "CHCl2F",
+  "molar_mass": 0.1029227,
+  "Tc": 452.72,
+  "Pc": 5288505,
+  "omega": 0.20376,
+  "source": "Platzer-BOOK-1990"
+ },
+ "R218": {
+  "cas": "76-19-7",
+  "formula": "C3F8",
+  "molar_mass": 0.18801933,
+  "Tc": 345.02,
+  "Pc": 2640206,
+  "omega": 0.3172,
+  "source": "Lemmon-JCED-2006"
+ },
+ "R22": {
+  "cas": "75-45-6",
+  "formula": "CHClF2",
+  "molar_mass": 0.086468,
+  "Tc": 369.295,
+  "Pc": 4990000,
+  "omega": 0.22082,
+  "source": "Kamei-IJT-1995"
+ },
+ "R227EA": {
+  "cas": "431-89-0",
+  "formula": "C3HF7",
+  "molar_mass": 0.17002886,
+  "Tc": 374.9,
+  "Pc": 2925249,
+  "omega": 0.35764,
+  "source": "Lemmon-JCED-2016-365227"
+ },
+ "R23": {
+  "cas": "75-46-7",
+  "formula": "CHF3",
+  "molar_mass": 0.07001385,
+  "Tc": 299.293,
+  "Pc": 4831745,
+  "omega": 0.26294,
+  "source": "Penoncello-JPCRD-2003"
+ },
+ "R236EA": {
+  "cas": "431-63-0",
+  "formula": "C3H2F6",
+  "molar_mass": 0.1520384,
+  "Tc": 412.409,
+  "Pc": 3413693,
+  "omega": 0.36832,
+  "source": "Rui-FPE-2013"
+ },
+ "R245ca": {
+  "cas": "679-86-7",
+  "formula": "C3H3F5",
+  "molar_mass": 0.13404794,
+  "Tc": 447.57,
+  "Pc": 3940740,
+  "omega": 0.35457,
+  "source": "Zhou-IJT-2016-R245ca"
+ },
+ "R245fa": {
+  "cas": "460-73-1",
+  "formula": "C3H3F5",
+  "molar_mass": 0.13404794,
+  "Tc": 427.01,
+  "Pc": 3650995,
+  "omega": 0.37834,
+  "source": "Akasaka-JPCRD-2015-R245fa"
+ },
+ "R32": {
+  "cas": "75-10-5",
+  "formula": "CH2F2",
+  "molar_mass": 0.052024,
+  "Tc": 351.255,
+  "Pc": 5782645,
+  "omega": 0.27696,
+  "source": "TillnerRoth-JPCRD-1997"
+ },
+ "R40": {
+  "cas": "74-87-3",
+  "formula": "CH3Cl",
+  "molar_mass": 0.05048752,
+  "Tc": 418.626,
+  "Pc": 6929003,
+  "omega": 0.14502,
+  "source": "Thol-IJT-2014"
+ },
+ "R41": {
+  "cas": "593-53-3",
+  "formula": "CH3F",
+  "molar_mass": 0.03403292,
+  "Tc": 317.279,
+  "Pc": 5906115,
+  "omega": 0.20036,
+  "source": "Lemmon-JCED-2006"
+ },
+ "RC318": {
+  "cas": "115-25-3",
+  "formula": "C4F8",
+  "molar_mass": 0.2000312,
+  "Tc": 388.371,
+  "Pc": 2777531,
+  "omega": 0.35546,
+  "source": "Platzer-BOOK-1990"
+ },
+ "SulfurDioxide": {
+  "cas": "7446-09-5",
+  "formula": "O2S",
+  "molar_mass": 0.0640638,
+  "Tc": 430.64,
+  "Pc": 7886579,
+  "omega": 0.25613,
+  "source": "Gao-JCED-2016"
+ },
+ "SulfurHexafluoride": {
+  "cas": "2551-62-4",
+  "formula": "F6S",
+  "molar_mass": 0.146055419,
+  "Tc": 318.723,
+  "Pc": 3754983,
+  "omega": 0.21846,
+  "source": "Guder-JPCRD-2009"
+ },
+ "Tetrahydrofuran": {
+  "cas": "109-99-9",
+  "formula": "C4H8O",
+  "molar_mass": 0.07210572,
+  "Tc": 540.2,
+  "Pc": 5304435,
+  "omega": 0.23394,
+  "source": "Fiedler-IJT-2023-THF"
+ },
+ "Toluene": {
+  "cas": "108-88-3",
+  "formula": "C7H8",
+  "molar_mass": 0.09213842,
+  "Tc": 591.749,
+  "Pc": 4126347,
+  "omega": 0.26573,
+  "source": "Lemmon-JCED-2006"
+ },
+ "trans-2-Butene": {
+  "cas": "624-64-6",
+  "formula": "C4H8",
+  "molar_mass": 0.05610632,
+  "Tc": 428.611,
+  "Pc": 4019095,
+  "omega": 0.20919,
+  "source": "Lemmon-FPE-2005"
+ },
+ "Water": {
+  "cas": "7732-18-5",
+  "formula": "H2O",
+  "molar_mass": 0.018015268,
+  "Tc": 647.096,
+  "Pc": 22064000,
+  "omega": 0.34429,
+  "source": "Wagner-JPCRD-2002"
+ },
+ "Xenon": {
+  "cas": "7440-63-3",
+  "formula": "Xe",
+  "molar_mass": 0.131293,
+  "Tc": 289.733,
+  "Pc": 5841914,
+  "omega": 0.00363,
+  "source": "Lemmon-JCED-2006"
+ }
+}
