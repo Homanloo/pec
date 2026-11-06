@@ -1,0 +1,12 @@
+.git
+.github
+.venv
+**/__pycache__
+**/*.pyc
+**/tests
+scripts
+staticfiles
+htmlcov
+.coverage
+frontend/node_modules
+frontend/dist
