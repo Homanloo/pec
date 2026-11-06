@@ -58,3 +58,19 @@ def saturation_pressure(eos, component, T):
     if not f(lo) > 0 > f(hi):
         raise ArithmeticError(f"P^sat not bracketed at T = {T} K")
     return math.exp(brentq(f, lo, hi, xtol=1e-13, rtol=1e-13, maxiter=200))
+
+
+def saturation_temperature(eos, component, P):
+    """Saturation temperature [K] of a pure component at P [Pa]: T with P^sat(T) = P.
+
+    P^sat rises monotonically with T (Clausius–Clapeyron), so Brent's method on
+    ln P^sat(T) − ln P between 0.25 Tc and 0.9999 Tc finds it; outside that range it raises.
+    """
+    lo, hi = 0.25 * component.Tc, 0.9999 * component.Tc
+
+    def f(T):
+        return math.log(saturation_pressure(eos, component, T) / P)
+
+    if not f(lo) < 0 < f(hi):
+        raise ValueError(f"P = {P} Pa is outside the saturation range of {component.name}")
+    return brentq(f, lo, hi, xtol=1e-12, rtol=1e-13, maxiter=200)

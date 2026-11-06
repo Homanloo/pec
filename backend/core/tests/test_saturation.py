@@ -3,7 +3,7 @@ import pytest
 from thermo.eos import PR, RK, SRK, VDW
 
 from pec.components import get_component
-from pec.saturation import saturation_pressure
+from pec.saturation import saturation_pressure, saturation_temperature
 
 THERMO = {"vdW": VDW, "RK": RK, "SRK": SRK, "PR": PR}
 
@@ -36,3 +36,10 @@ def test_no_saturation_at_or_above_tc():
     methane = get_component("Methane")
     with pytest.raises(ValueError, match="not below Tc"):
         saturation_pressure("PR", methane, methane.Tc)
+
+
+def test_saturation_temperature_inverts_saturation_pressure():
+    water = get_component("Water")
+    for T in (300.0, 450.0, 640.0):
+        P = saturation_pressure("PR", water, T)
+        assert saturation_temperature("PR", water, P) == pytest.approx(T, rel=1e-10)
