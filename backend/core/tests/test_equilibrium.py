@@ -88,3 +88,13 @@ def test_no_dew_point_above_the_cricondentherm():
     # and the solver must say so rather than return the trivial solution.
     with pytest.raises(RuntimeError, match="dew point not found"):
         eq.dew_pressure("PR", COMPONENTS, 450.0, Z, KIJ)
+
+
+def test_phase_label():
+    # Pure water at 1 atm: exact on either side of the boiling point
+    water = [get_component("Water")]
+    assert eq.phase_label("PR", water, 350.0, 101325.0, [1.0]) == "liquid"
+    assert eq.phase_label("PR", water, 400.0, 101325.0, [1.0]) == "vapour"
+    # The one-phase states of test_flash: superheated vapour, compressed liquid
+    assert eq.phase_label("PR", COMPONENTS, 350.0, 1e6, Z, KIJ) == "vapour"
+    assert eq.phase_label("PR", COMPONENTS, 300.0, 1.5e7, Z, KIJ) == "liquid"

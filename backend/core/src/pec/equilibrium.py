@@ -12,7 +12,8 @@ import math
 import numpy as np
 from scipy.optimize import brentq
 
-from pec.eos import ln_phi
+from pec.constants import R
+from pec.eos import VC_OVER_B, ln_phi, mixture_parameters
 
 TOL = 1e-10  # on ln K, ln W and ln ΣKx: equal fugacities to ~1e-10 relative
 TRIVIAL = 1e-4  # max |ln K| below this means the two phases are the same phase
@@ -25,6 +26,19 @@ def wilson_K(components, T, P):
     Pc = np.array([c.Pc for c in components])
     omega = np.array([c.omega for c in components])
     return Pc / P * np.exp(5.373 * (1 + omega) * (1 - Tc / T))
+
+
+def phase_label(eos, components, T, P, z, kij=None):
+    """ "liquid" or "vapour" for a single (stable) phase.
+
+    Vapour-like if its molar volume exceeds the pseudo-critical volume Σ z_i V_c,i of the EOS,
+    with V_c,i = b_i·(V_c/b); since b = Σ z_i b_i this is V/b > V_c/b, i.e. Z/B > V_c/b. For a
+    pure component below Tc it is exact (the liquid branch lies at V < Vc); for a mixture or a
+    supercritical fluid it is a convention, not a phase boundary.
+    """
+    Z, _ = ln_phi(eos, components, T, P, z, "stable", kij)
+    _, b, _, _ = mixture_parameters(eos, components, T, z, kij)
+    return "vapour" if Z / (b * P / (R * T)) > VC_OVER_B[eos] else "liquid"
 
 
 def rachford_rice(z, K):
