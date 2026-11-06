@@ -33,6 +33,9 @@ EOS = {
     ),
 }
 
+# Vc/b = 1/η: the critical volume in units of b, used to tell liquid-like from vapour-like
+VC_OVER_B = {"vdW": 3.0, "RK": 1 / _ETA_RK, "SRK": 1 / _ETA_RK, "PR": 1 / _ETA_PR}
+
 
 def alpha(eos, Tr, omega):
     """α(T_r, ω) of each equation; T_r = T/Tc.
@@ -119,6 +122,34 @@ def _I(Z, B, sigma, eps):
     return math.log((Z + sigma * B) / (Z + eps * B)) / (sigma - eps)
 
 
+def mixture_parameters(eos, components, T, x, kij=None):
+    """a [Pa m⁶/mol²], b [m³/mol], Σ_j x_j a_ij and b_i of a mixture at T (vdW one-fluid).
+
+    a_i = Ψ α R² Tc²/Pc, b_i = Ω R Tc/Pc;
+    a = ΣΣ x_i x_j a_ij with a_ij = (1 − k_ij)√(a_i a_j);  b = Σ x_i b_i.
+    kij: symmetric matrix of binary interaction parameters (default zeros).
+    """
+    _, _, Omega, Psi = EOS[eos]
+    Tc = np.array([c.Tc for c in components])
+    Pc = np.array([c.Pc for c in components])
+    omega = np.array([c.omega for c in components])
+    x = np.asarray(x, dtype=float)
+    kij = np.zeros((len(x), len(x))) if kij is None else np.asarray(kij, dtype=float)
+
+    a_i = Psi * alpha(eos, T / Tc, omega) * (R * Tc) ** 2 / Pc
+    b_i = Omega * R * Tc / Pc
+    sum_xa = (1 - kij) * np.sqrt(np.outer(a_i, a_i)) @ x  # Σ_j x_j a_ij
+    return float(x @ sum_xa), float(x @ b_i), sum_xa, b_i
+
+
+def pressure(eos, components, T, V, x, kij=None):
+    """P [Pa] at T [K] and molar volume V [m³/mol]: the equation of state itself."""
+    sigma, eps, _, _ = EOS[eos]
+    a, b, _, _ = mixture_parameters(eos, components, T, x, kij)
+    V = np.asarray(V, dtype=float)
+    return R * T / (V - b) - a / ((V + eps * b) * (V + sigma * b))
+
+
 def ln_phi(eos, components, T, P, x, phase="stable", kij=None):
     """Compressibility factor Z and ln φ̂_i of a phase of mole fractions x at T [K], P [Pa].
 
@@ -129,23 +160,8 @@ def ln_phi(eos, components, T, P, x, phase="stable", kij=None):
     ln φ̂_i = (b_i/b)(Z − 1) − ln(Z − B) − (A/B)(2Σ_j x_j a_ij / a − b_i/b) I
     (Smith, Van Ness & Abbott, 2005, §14.4; Michelsen & Mollerup, 2007, ch. 3).
     """
-    sigma, eps, Omega, Psi = EOS[eos]
-    Tc = np.array([c.Tc for c in components])
-    Pc = np.array([c.Pc for c in components])
-    omega = np.array([c.omega for c in components])
-    x = np.asarray(x, dtype=float)
-    kij = np.zeros((len(x), len(x))) if kij is None else np.asarray(kij, dtype=float)
-
-    # Pure-component parameters
-    a_i = Psi * alpha(eos, T / Tc, omega) * (R * Tc) ** 2 / Pc
-    b_i = Omega * R * Tc / Pc
-
-    # van der Waals one-fluid mixing:
-    # a = ΣΣ x_i x_j a_ij with a_ij = (1 − k_ij)√(a_i a_j);  b = Σ x_i b_i
-    a_ij = (1 - kij) * np.sqrt(np.outer(a_i, a_i))
-    sum_xa = a_ij @ x  # Σ_j x_j a_ij
-    a = float(x @ sum_xa)
-    b = float(x @ b_i)
+    sigma, eps, _, _ = EOS[eos]
+    a, b, sum_xa, b_i = mixture_parameters(eos, components, T, x, kij)
     A = a * P / (R * T) ** 2
     B = b * P / (R * T)
 

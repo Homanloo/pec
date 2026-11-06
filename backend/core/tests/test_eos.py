@@ -3,7 +3,8 @@ import pytest
 from thermo.eos_mix import PRMIX, RKMIX, SRKMIX, VDWMIX
 
 from pec.components import get_component
-from pec.eos import EOS, ln_phi
+from pec.constants import R
+from pec.eos import EOS, ln_phi, pressure
 
 # A natural-gas-like mixture with nonzero k_ij (symmetric; values typical for these pairs)
 COMPONENTS = [
@@ -77,3 +78,12 @@ def test_ln_phi_is_derivative_of_gibbs_energy():
     for eos in EOS:
         numeric = [(nG(eos, X + h * e) - nG(eos, X - h * e)) / (2 * h) for e in np.eye(len(X))]
         assert ln_phi(eos, COMPONENTS, T, P, X, kij=KIJ)[1] == pytest.approx(numeric, abs=1e-8)
+
+
+def test_pressure_at_a_root_is_the_pressure():
+    # The cubic in Z is the equation of state rearranged, so P(V = ZRT/P) must give back P.
+    T, P = 200.0, 1e6
+    for eos in EOS:
+        for phase in ("liquid", "vapour"):
+            Z, _ = ln_phi(eos, COMPONENTS, T, P, X, phase, KIJ)
+            assert pressure(eos, COMPONENTS, T, Z * R * T / P, X, KIJ) == pytest.approx(P, rel=1e-9)
